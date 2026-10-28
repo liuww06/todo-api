@@ -27,4 +27,4 @@ jobs:
               run: dotnet build --no-restore
 
             - name: 测试
-              run: dotenet test --no-build
+              run: dotnet test --no-build
