@@ -19,7 +19,14 @@ jobs:
         uses: actions/setup-dotnet@v5 # 官方积木：在runner上装sdk
         with: #传给这个积木的参数（像函数参数）
           dotnet-version: 10.0.x # 指定要安装的 .NET SDK 版本
-          cache: true #启用缓存，避免每次都下载sdk
+
+      - name: 缓存 Nuget 包
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
 
       - name: 还原依赖
         run: dotnet restore
