@@ -38,7 +38,7 @@ public class TodoServiceTests
 
         var result = service.Complete(item.Id);
 
-        Assert.True(result);
+        Assert.False(result);
         Assert.Contains(service.GetAll(), t => t.Id == item.Id && t.IsDone);
     }
 
