@@ -22,6 +22,8 @@ app.MapPut("/todos/{id}/complete", (int id) =>
 
 app.MapGet("/health", () => Results.Ok(new {Status = "OK"}));
 
+app.MapGet("/", () => Results.Text("Hello World!"));
+
 app.Run();
 
 public record CreateTodoRequest(string Title);
