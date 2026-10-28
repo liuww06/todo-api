@@ -1,0 +1,30 @@
+# 流水线显示的名称（Action页面的标题）
+name: CI
+
+#触发器：什么时候跑
+on:
+    push:
+        branches: [main] #push到main时
+    pull_request: #任何pr创建/更新时（无论目标分支是谁）
+
+# 工作岗位列表
+jobs:
+    build-and-test: #job的id(自己起名)
+        runs-on: ubuntu-latest #申请一台github托管的ubuntu虚拟机
+        steps:
+            - name: 拉取代码
+              uses: actions/checkout@v5 #官方积木： 把仓库代码下载到 runner
+
+            - name: 安装.net sdk
+              uses: actions/setup-dotnet@v5 # 官方积木：在runner上装sdk
+              with: #传给这个积木的参数（像函数参数）
+                  dotnet-version: 10.0.x # 指定要安装的 .NET SDK 版本
+
+            - name: 还原依赖
+              run: dotnet restore
+
+            - name: 编译
+              run: dotnet build --no-restore
+
+            - name: 测试
+              run: dotenet test --no-build
