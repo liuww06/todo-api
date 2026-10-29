@@ -25,3 +25,5 @@ app.MapGet("/health", () => Results.Ok(new { Status = "OK" }));
 app.Run();
 
 public record CreateTodoRequest(string Title);
+
+public partial class Program { }

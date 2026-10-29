@@ -38,4 +38,4 @@ jobs:
         run: dotnet format --verify-no-changes
 
       - name: 测试（含覆盖率检查）
-        run: dotnet test /p:CollectCoverage=true /p:Threshold=60 /p:thresholdType=line
+        run: dotnet test /p:CollectCoverage=true /p:Threshold=80 /p:thresholdType=line
