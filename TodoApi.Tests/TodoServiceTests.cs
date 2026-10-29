@@ -29,7 +29,7 @@ public class TodoServiceTests
         // Act & Assert
         Assert.Throws<ArgumentException>(() => service.Add(title));
     }
-    
+
     [Fact]
     public void Complete_存在的任务_标记为完成()
     {

@@ -34,5 +34,8 @@ jobs:
       - name: 编译
         run: dotnet build --no-restore
 
-      - name: 测试
-        run: dotnet test --no-build
+      - name: 代码格式检查
+        run: dotnet format --verify-no-changes
+
+      - name: 测试（含覆盖率检查）
+        run: dotnet test /p:CollectCoverage=true /p:Threshold=60 /p:thresholdType=line

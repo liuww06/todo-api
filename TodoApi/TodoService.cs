@@ -10,7 +10,7 @@ public class TodoService
 
     public TodoItem Add(string title)
     {
-        if(string.IsNullOrWhiteSpace(title))
+        if (string.IsNullOrWhiteSpace(title))
         {
             throw new ArgumentException("标题不能为空", nameof(title));
         }
