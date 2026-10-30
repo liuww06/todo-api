@@ -39,3 +39,12 @@ jobs:
 
       - name: 测试（含覆盖率检查）
         run: dotnet test /p:CollectCoverage=true /p:Threshold=80 /p:thresholdType=line
+
+      - name: 发布产物
+        run: dotnet publish TodoApi/TodoApi.csproj -c Release -o ./publish
+
+      - name: 上传制品
+        uses: actions/upload-artifact@v4
+        with:
+          name: todo-api-${{ github.sha }} #制品名称
+          path: ./publish #制品路径
