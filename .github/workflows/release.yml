@@ -1,0 +1,29 @@
+name: Release
+on:
+    push: 
+        tags: ['v*'] # 只有push tag时才触发
+jobs:
+    realease:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: 拉取代码
+              uses: actions/checkout@v5
+            
+            - name: 安装 .NET SDK
+              uses: actions/setup-dotnet@v5
+              with:
+                dotnet-version: 10.0.x
+            
+            - name: 发布
+              run: dotnet publish TodoApi/TodoApi.csproj -c Release -o publish
+            
+            - name: 打包
+              run: cd publish && zip -r ../todo-api-${{ github.ref_name }}.zip .
+            
+            - name: 创建 Release
+              env:
+                GH_TOKEN: ${{ github.token }}
+              run: gh release create "${{ github.ref_name }}" --title "${{ github.ref_name }}" --generate-notes ./todo-api-${{ github.ref_name }}.zip
+            
