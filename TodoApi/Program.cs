@@ -20,7 +20,7 @@ app.MapPost("/todos", (CreateTodoRequest request) =>
 app.MapPut("/todos/{id}/complete", (int id) =>
     todos.Complete(id) ? Results.NoContent() : Results.NotFound());
 
-app.MapGet("/health", () => Results.Ok(new { Status = "OK" , DateTime = DateTime.Now.ToString("R")}));
+app.MapGet("/health", () => Results.Ok(new { Status = "OK", DateTime = DateTime.Now.ToString("R") }));
 
 app.Run();
 
