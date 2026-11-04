@@ -20,4 +20,17 @@ public class TodoApiIntegrationTests : IClassFixture<WebApplicationFactory<Progr
         Assert.NotNull(list);
         Assert.Contains(list, t => t.Title == "集成测试");
     }
+
+    [Fact]
+    public async Task 检查检查_正常返回OK()
+    {
+
+        var health = await _client.GetFromJsonAsync<HealthCheckResponse>("/health");
+        Assert.Equal("OK", health.Status);
+    }
+}
+
+internal class HealthCheckResponse
+{
+    public string Status { get; set; } = default!;
 }
